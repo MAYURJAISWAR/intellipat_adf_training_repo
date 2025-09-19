@@ -1,0 +1,49 @@
+{
+	"name": "ds_intellipatstorageaccount_account",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_intelllipathtraining_intellipatstorageaccount",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "dataflow"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "account.csv",
+				"folderPath": "banking_data",
+				"fileSystem": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "account_id",
+				"type": "String"
+			},
+			{
+				"name": "district_id",
+				"type": "String"
+			},
+			{
+				"name": "frequency",
+				"type": "String"
+			},
+			{
+				"name": "date",
+				"type": "String"
+			},
+			{
+				"name": "Account_type",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

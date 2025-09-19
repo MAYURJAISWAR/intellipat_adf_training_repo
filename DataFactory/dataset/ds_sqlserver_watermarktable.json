@@ -1,0 +1,31 @@
+{
+	"name": "ds_sqlserver_watermarktable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_intellipatraining_mysqlserverdb",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "sql_server"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "tableName",
+				"type": "varchar"
+			},
+			{
+				"name": "watermarkvalue",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "watermarktable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

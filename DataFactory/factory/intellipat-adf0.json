@@ -1,0 +1,9 @@
+{
+	"name": "intellipat-adf0",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "cd077a3a-efb2-45f2-ac8e-800ef5de0071",
+		"tenantId": "42ce94cf-c8c5-4aa3-a75f-bced38e34883"
+	}
+}

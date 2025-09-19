@@ -1,0 +1,122 @@
+{
+	"name": "df_district",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_intellipatstorageaccount_district",
+						"type": "DatasetReference"
+					},
+					"name": "district"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_intellipatstorageaccount_account",
+						"type": "DatasetReference"
+					},
+					"name": "account"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_intellipatstorageaccount_target_bankingDataDataFlowOuput",
+						"type": "DatasetReference"
+					},
+					"name": "sinkmetricoutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "districtselectedfield"
+				},
+				{
+					"name": "accountselectedfield"
+				},
+				{
+					"name": "joinstream"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "metrics"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          A1 as integer,",
+				"          A2 as string,",
+				"          A3 as string,",
+				"          A4 as string,",
+				"          A5 as string,",
+				"          A6 as string,",
+				"          A7 as string,",
+				"          A8 as string,",
+				"          A9 as string,",
+				"          A10 as string,",
+				"          A11 as string,",
+				"          A12 as string,",
+				"          A13 as string,",
+				"          A14 as string,",
+				"          A15 as string,",
+				"          A16 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> district",
+				"source(output(",
+				"          account_id as integer,",
+				"          district_id as integer,",
+				"          frequency as string,",
+				"          date as string,",
+				"          Account_type as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> account",
+				"district select(mapColumn(",
+				"          district_id = A1,",
+				"          district_name = A2,",
+				"          region = A3",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> districtselectedfield",
+				"account select(mapColumn(",
+				"          account_id,",
+				"          district_id,",
+				"          frequency,",
+				"          Account_type",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> accountselectedfield",
+				"districtselectedfield, accountselectedfield join(districtselectedfield@district_id == accountselectedfield@district_id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinstream",
+				"joinstream select(mapColumn(",
+				"          district_id = districtselectedfield@district_id,",
+				"          district_name,",
+				"          region,",
+				"          account_id,",
+				"          frequency,",
+				"          Account_type",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"joinstream aggregate(groupBy(Account_type),",
+				"     total_count = count({account_id})) ~> metrics",
+				"metrics sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkmetricoutput"
+			]
+		}
+	}
+}

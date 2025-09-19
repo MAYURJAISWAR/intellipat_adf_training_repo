@@ -1,0 +1,93 @@
+{
+	"name": "ds_intellipatstorageaccount_district",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_intelllipathtraining_intellipatstorageaccount",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "dataflow"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "district.csv",
+				"folderPath": "banking_data",
+				"fileSystem": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "A1",
+				"type": "String"
+			},
+			{
+				"name": "A2",
+				"type": "String"
+			},
+			{
+				"name": "A3",
+				"type": "String"
+			},
+			{
+				"name": "A4",
+				"type": "String"
+			},
+			{
+				"name": "A5",
+				"type": "String"
+			},
+			{
+				"name": "A6",
+				"type": "String"
+			},
+			{
+				"name": "A7",
+				"type": "String"
+			},
+			{
+				"name": "A8",
+				"type": "String"
+			},
+			{
+				"name": "A9",
+				"type": "String"
+			},
+			{
+				"name": "A10",
+				"type": "String"
+			},
+			{
+				"name": "A11",
+				"type": "String"
+			},
+			{
+				"name": "A12",
+				"type": "String"
+			},
+			{
+				"name": "A13",
+				"type": "String"
+			},
+			{
+				"name": "A14",
+				"type": "String"
+			},
+			{
+				"name": "A15",
+				"type": "String"
+			},
+			{
+				"name": "A16",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

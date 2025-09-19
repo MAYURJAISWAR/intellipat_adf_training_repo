@@ -1,0 +1,24 @@
+{
+	"name": "ds_intellipatstorageaccount_target_bankingDataDataFlowOuput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_intelllipathtraining_intellipatstorageaccount",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "banking_data_dataflow_output",
+				"fileSystem": "target"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
